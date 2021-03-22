@@ -2,8 +2,9 @@
 CREATE TABLE customers(
     ---cus_id sera la clé primaire de la table 
    cus_id COUNTER,
-   --- ici tout les renseignements du clients devront etre mis
+--- ici tout les renseignements du clients devront etre mis
    cus_firstname VARCHAR(50) NOT NULL,
+--- avec un caractere maximum 
    cus_lastname VARCHAR(50) NOT NULL,
    cus_mail VARCHAR(70) NOT NULL,
    cus_address VARCHAR(50) NOT NULL,
@@ -13,17 +14,19 @@ CREATE TABLE customers(
    cus_add_date DATE NOT NULL,
    cus_update_date DATE NOT NULL,
    PRIMARY KEY(cus_id),
-   --- propriété du mail sera unique ainsi que sont mots de passe
+--- propriété du mail sera unique ainsi que sont mots de passe
    UNIQUE(cus_mail),
    UNIQUE(cus_password)
 );
 
 CREATE TABLE suppliers(
+--- sup_id sera la clé primaire de la table mis avec un COUNTER permettra d'avoir une clé primaire unique
    sup_id COUNTER,
    sup_name VARCHAR(50) NOT NULL,
    sup_phone_number VARCHAR(15) NOT NULL,
    sup_mail VARCHAR(50) NOT NULL,
    sup_address DOUBLE NOT NULL,
+--- ici on nous montre bien que la clé primaire est bien sup_id dans cette table
    PRIMARY KEY(sup_id)
 );
 
@@ -35,11 +38,14 @@ CREATE TABLE categories(
 
 CREATE TABLE orders(
    ode_id COUNTER,
+--- cette ligne nous montre le type numerique DECIMAL donc un maximum de 7 chiffres dont apres la virgule
    ode_payment DECIMAL(7,2) NOT NULL,
+--- ici une date a ete inserer donc jai du mettre un type date
    ode_delivery_date DATETIME NOT NULL,
    ode_ship_date DATE NOT NULL,
    cus_id INT NOT NULL,
    PRIMARY KEY(ode_id),
+--- la liaison des deux tables a permis d'inserer une clé étrangère  dans la table
    FOREIGN KEY(cus_id) REFERENCES customers(cus_id)
 );
 
